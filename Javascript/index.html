@@ -43,15 +43,26 @@
       });
 
       document.querySelector('form').addEventListener('submit', function (e) {
-        if (document.getElementById('email').value === '') {
+        var emailValue = document.getElementById('email').value;
+        var pwValue = document.getElementById('pw').value;
+        if (emailValue === '') {
           e.preventDefault();
           alert('아이디를 입력하세요');
         }
-        if (document.getElementById('pw').value === '') {
+        if (/\S+@\S+.\S+/.test(emailValue) === false) {
+          e.preventDefault();
+          alert('이메일 형식을 맞춰주세요');
+        }
+        if (pwValue === '') {
           e.preventDefault();
           alert('비밀번호를 입력하세요');
         }
-        if (document.getElementById('pw').value.length < 6) {
+        if (/[A-Z]/.test(pwValue) === false) {
+          e.preventDefault();
+          alert('비밀번호 형식이 아닙니다.');
+        }
+
+        if (pwValue.length < 6) {
           e.preventDefault();
           alert('비밀번호는 6자 이상 입력해주세요!');
         }
@@ -94,6 +105,70 @@
       <h4>Shirts on Sale</h4>
       <button id="id" class="btn btn-danger">로그인</button>
     </div>
+
+    <div class="alert alert-danger" id="bye">
+      <span id="counts">5</span>초 이내 구매시 사은품 증정
+    </div>
+
+    <div style="overflow: hidden">
+      <div class="slide-container">
+        <div class="slide-box">
+          <img src="car1.png" />
+        </div>
+        <div class="slide-box">
+          <img src="car2.png" />
+        </div>
+        <div class="slide-box">
+          <img src="car3.png" />
+        </div>
+      </div>
+    </div>
+
+    <button class="slide1">1</button>
+    <button class="slide2">2</button>
+    <button class="slide3">3</button>
+
+    <script>
+      document.querySelector('.slide1').addEventListener('click', function () {
+        document.querySelector('.slide-container').style.transform =
+          'translateX(0vw)';
+      });
+
+      document.querySelector('.slide2').addEventListener('click', function () {
+        document.querySelector('.slide-container').style.transform =
+          'translateX(-100vw)';
+      });
+
+      document.querySelector('.slide3').addEventListener('click', function () {
+        document.querySelector('.slide-container').style.transform =
+          'translateX(-200vw)';
+      });
+    </script>
+
+    <script>
+      var count = 5;
+      setInterval(function () {
+        // if (document.getElementById('count').innerHTML === '5') {
+        //   document.getElementById('count').innerHTML = '4';
+        // } else if (document.getElementById('count').innerHTML === '4') {
+        //   document.getElementById('count').innerHTML = '3';
+        // } else if (document.getElementById('count').innerHTML === '3') {
+        //   document.getElementById('count').innerHTML = '2';
+        // } else if (document.getElementById('count').innerHTML === '2') {
+        //   document.getElementById('count').innerHTML = '1';
+        // } else if (document.getElementById('count').innerHTML === '1') {
+        //   document.getElementById('count').innerHTML = '0';
+        // } else if (document.getElementById('count').innerHTML === '0') {
+        //   document.getElementById('bye').style.display = 'none';
+        // }
+        count -= 1;
+        if (count >= 0) {
+          document.querySelector('#counts').innerHTML = count;
+        } else if (document.querySelector('#counts').innerHTML === '0') {
+          document.getElementById('bye').style.display = 'none';
+        }
+      }, 1000);
+    </script>
 
     <script>
       // document.querySelector('.list-group'); // css 클래스며이나 , id를 넣고 싶을떄
