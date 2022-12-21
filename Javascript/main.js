@@ -60,15 +60,50 @@ for (let i = 0; i < $('.tab-button').length; i++) {
 //     $('.tab-content').eq(2).addClass('show');
 //   });
 
+var pants = [28, 30, 32];
+var shirts = [90, 95, 100, 105];
+
+var obj = { name: 'yang', age: 30 };
+
+for (var key in obj) {
+  console.log(obj[key]);
+}
+
 document
   .querySelectorAll('.form-select')[0]
   .addEventListener('input', function (e) {
     var value = e.currentTarget.value;
 
+    // 자바스크립트로 html 생성법 1
+    // let p = document.createElement('p');
+    // p.innerHTML = '안녕';
+    // document.querySelector('#test').appendChild(p);
+
     if (value === '셔츠') {
+      document.querySelectorAll('.form-select')[1].innerHTML = '';
+      // var option = `<option>90</option>
+      // <option>95</option>`;
+      // document
+      //   .querySelectorAll('.form-select')[1]
+      //   .insertAdjacentHTML('beforeend', option);
       document.querySelectorAll('.form-select')[1].classList.remove('hide');
+      shirts.forEach(x => {
+        $('.form-select').eq(1).append(`<option>${x}</option>`);
+      });
     } else {
       document.querySelectorAll('.form-select')[1].classList.add('hide');
+    }
+
+    if (value === '바지') {
+      // var option = document.createElement('option');
+      // option.innerHTML = '28';
+      $('.form-select').eq(1).html('');
+      // document.querySelectorAll('.form-select')[1].appendChild(option);
+      document.querySelectorAll('.form-select')[1].classList.remove('hide');
+
+      pants.forEach(function (item) {
+        $('.form-select').eq(1).append(`<option>${item}</option>`);
+      });
     }
   });
 
@@ -81,3 +116,8 @@ document
 //       $('.form-select').eq(1).removeClass('hide');
 //     }
 //   });
+
+// // 자바스크립트로 html 생성법 2
+// let add = '<p>헬로우</p>';
+// document.querySelector('#test').insertAdjacentHTML('beforeend', add);
+// $('#test').append(add);
