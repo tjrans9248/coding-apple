@@ -274,17 +274,95 @@
 // var father1 = new Father('sean');
 
 //getter, setter
-var person = {
-  name: 'park',
-  age: 30,
-  get nextAge() {
-    // get은 데이터 꺼내쓰는 함수에
-    return this.age + 1;
-  },
-  set setAge(age) {
-    // set은 데이터 변경하는 함수에
-    this.age = parseInt(age);
+// var person = {
+//   name: 'park',
+//   age: 30,
+//   get nextAge() {
+//     // get은 데이터 꺼내쓰는 함수에
+//     // get 함수들은 return 이 있어야 합니다.
+//     return this.age + 1;
+//   },
+//   set setAge(age) {
+//     // set은 데이터 변경하는 함수에
+//     // 파라미터가 1개 있어야 합니다.
+//     this.age = parseInt(age);
+//   },
+// };
+
+// person.setAge = '30';
+
+// class Person {
+//   constructor() {
+//     this.name = 'sean';
+//     this.age = 20;
+//   }
+//   get getAge() {
+//     return this.age + 1;
+//   }
+//   set setAge(age) {
+//     this.age = age;
+//   }
+// }
+
+// var obj = new Person();
+
+// class, extends, getter, setter 연습문제
+
+// class Poppy {
+//   constructor(type, color) {
+//     this.type = type;
+//     this.color = color;
+//   }
+// }
+
+// // var dog1 = new Poppy('말티즈', 'white');
+// // var dog2 = new Poppy('진돗개', 'brown');
+
+// class Cats extends Poppy {
+//   constructor(type, color, age) {
+//     super(type, color);
+//     this.age = age;
+//   }
+//   getAge() {
+//     return this.age + 1;
+//   }
+// }
+
+// var cat1 = new Cats('코숏', 'white', 5);
+
+// class Unit {
+//   constructor(){
+//     this.atk = 5
+//     this.life = 100
+//   }
+//   battlePoint(){
+//     return this.atk + this.life
+//   }
+//   heal(life){
+//     this.life = this.life + life
+//   }
+// }
+
+var data = {
+  odd: [],
+  even: [],
+  setOdd: function (...numbers) {
+    numbers.forEach(a => {
+      if (a % 2 === 1) {
+        this.odd.push(a);
+      } else {
+        this.even.push(a);
+      }
+    });
   },
 };
 
-person.setAge = '30';
+var data1 = {
+  odd: [1, 3],
+  even: [2, 4, 6],
+  get sorting() {
+    return [...this.odd, ...this.even].sort();
+  },
+};
+
+console.log(data1.sorting);
