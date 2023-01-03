@@ -343,26 +343,247 @@
 //   }
 // }
 
-var data = {
-  odd: [],
-  even: [],
-  setOdd: function (...numbers) {
-    numbers.forEach(a => {
-      if (a % 2 === 1) {
-        this.odd.push(a);
-      } else {
-        this.even.push(a);
-      }
-    });
-  },
-};
+// var data = {
+//   odd: [],
+//   even: [],
+//   setOdd: function (...numbers) {
+//     numbers.forEach(a => {
+//       if (a % 2 === 1) {
+//         this.odd.push(a);
+//       } else {
+//         this.even.push(a);
+//       }
+//     });
+//   },
+// };
 
-var data1 = {
-  odd: [1, 3],
-  even: [2, 4, 6],
-  get sorting() {
-    return [...this.odd, ...this.even].sort();
-  },
-};
+// var data1 = {
+//   odd: [1, 3],
+//   even: [2, 4, 6],
+//   get sorting() {
+//     return [...this.odd, ...this.even].sort();
+//   },
+// };
 
-console.log(data1.sorting);
+// console.log(data1.sorting);
+
+// Destructuring
+
+// var arr = [2, 3, 4];
+
+// var [a, b, c = 10] = [2, 3];
+
+// console.log(c);
+// console.log(a);
+
+// var obj = { name: 'kim', age: 30 };
+// var name = obj.name;
+// var age = obj.age;
+
+// var { name: 나이 = 'yang' } = {};
+
+// console.log(나이);
+
+// var name = 'kim';
+// var age = 30;
+
+// var obj = { name, age };
+// console.log(obj);
+
+// 함수 디스트럭팅
+
+// var obj = { name: 'kim', age: 30 };
+
+// function hello([name, age]) {
+//   console.log(name, age);
+// }
+
+// hello([1, 2]);
+
+// 연습문제
+
+// var [number, address] = [30, 'seoul'];
+// var { address: a, number = 20 } = { address, number };
+
+// console.log(number, address);
+
+// let bodyInfo = {
+//   body: {
+//     height: 190,
+//     weight: 70,
+//   },
+//   size: ['상의 large', '바지 30인치'],
+// };
+
+// let {
+//   body: { height, weight },
+//   size: [상의, 하의],
+// } = bodyInfo;
+
+// console.log(1);
+// setTimeout(() => {
+//   console.log(2);
+// }, 1000);
+
+// addEventListener('click');
+
+// console.log(3);
+
+// let promise = new Promise(function (resolve, reject) {
+//   setTimeout(() => {
+//     resolve();
+//   }, 2000);
+// });
+
+// promise
+//   .then(() => {
+//     console.log('성공');
+//   })
+//   .catch(function () {
+//     console.log('실패');
+//   });
+
+// let imageLoading = new Promise((resolve, reject) => {
+//   let image = document.getElementById('test');
+//   image.addEventListener('load', () => {
+//     resolve();
+//   });
+//   image.addEventListener('error', () => {
+//     reject();
+//   });
+// });
+
+// imageLoading
+//   .then(() => {
+//     console.log('성공');
+//   })
+//   .catch(() => {
+//     console.log('실패');
+//   });
+
+// let promise = new Promise((resolve, reject) => {
+//   $.get('https://codingapple1.github.io/hello.txt').done(result => {
+//     console.log(result);
+//   });
+// });
+
+// promise
+//   .then(() => {
+//     console.log(promise);
+
+//     let promise2 = new Promise((resolve, reject) => {
+//       $.get('https://codingapple1.github.io/hello.txt').done(result => {
+//         console.log(result);
+//       });
+//     });
+
+//     return promise2;
+//   })
+//   .then(result => {
+//     console.log(result);
+//   });
+
+// async await
+
+// async function sum() {
+//   let promise = new Promise((res, rej) => {
+//     let sum = 1 + 1;
+//     res(sum);
+//   });
+//   try {
+//     let result = await promise;
+//     console.log(result);
+//   } catch {
+//     console.log('다시하세요');
+//   }
+// }
+// sum();
+
+// async function sum() {
+//   let promise = new Promise((res, rej) => {
+//     document.getElementById('a').addEventListener('click', () => {
+//       res('성공');
+//     });
+//   });
+//   var result = await promise;
+//   console.log(result);
+// }
+// sum();
+
+// var obj = { name: 'kim', age: 30 };
+
+// [1,2,3].forEach() // arr 자료 꺼낼때
+
+// for (let key in obj) {
+//   // obj 자료 꺼낼대
+//   console.log(obj[key]);
+// }
+
+// for in 반복문
+// 1. enumerable: true 한것만 반복해준다
+// 2. 부모의 portotype도 반복해준다
+// 3. object 자료형에만 씁니다.
+
+// class Parents {}
+// Parents.prototype.name = 'yang';
+
+// var obj = new Parents();
+
+// for (var key in obj) {
+//   console.log(obj[key]);
+// }
+
+// for of 반복문 : Array, 문자, arguments, NodeList, Map, Set
+
+// let arr = [2, 3, 4, 5];
+
+// iterable 한 자료형만 사용가능
+// for (var data of arr) {
+//   console.log(data);
+// }
+
+// arr[Symbol.iterator]();
+
+// var weight = Symbol('내 몸무게');
+// var height = Symbol('내 키');
+// var obj = { name: 'sean', age: 20 };
+
+// obj[weight] = 100;
+// obj[height] = 1234;
+
+// for (var key in obj) console.log(obj[key]);
+
+// console.log(obj);
+
+// symbol 특징
+// 1. 설명이 같다고 같은 심볼이 아님
+// 2. Symbol.for 로 만드는 전역 심볼
+// 3. 기본 내장 Symbol들
+
+// var a = Symbol.for('1');
+// var b = Symbol.for('1');
+
+// Map, set 자료형
+// map 자료형은 자료간의 연관성을 표현하기 위해 쓴다.
+// var person = new Map();
+// person.set('name', 'yang');
+
+// person.get('name'); // 자료 꺼낼때
+// person.delete('name'); // 자료 삭제할때
+// person.size; //  자료 갯수
+
+// for (var key of person.keys()) {
+//   console.log(key);
+// }
+
+// Set 자료형
+// 중복자료를 허용하지 않는 array 비슷한 것
+var info = ['a', 'b', 'c', 'b'];
+
+var info2 = new Set(info);
+
+info2.add('g'); // 추가
+info2.delete('g'); // 삭제
+info2.has('g'); // 잇냐 없냐
+
+console.log(info2);
