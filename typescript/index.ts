@@ -169,9 +169,9 @@
 
 // 숙제 2
 
-let 철수쌤 = { subject: 'math' };
-let 영희쌤 = { subject: ['science', 'english'] };
-let 민수쌤 = { subject: ['science', 'art', 'korean'] };
+// let 철수쌤 = { subject: 'math' };
+// let 영희쌤 = { subject: ['science', 'english'] };
+// let 민수쌤 = { subject: ['science', 'art', 'korean'] };
 
 // 함수는 만든다
 // array 자료를 넣으면 타입이 과목 이름이 맞는지 검사한다
@@ -430,31 +430,31 @@ let 민수쌤 = { subject: ['science', 'art', 'korean'] };
 
 // interface
 
-interface A {
-  color: string;
-  width: number;
-}
-let obj: A = { color: 'red', width: 100 };
+// interface A {
+//   color: string;
+//   width: number;
+// }
+// let obj: A = { color: 'red', width: 100 };
 
-// interface 장점: extends로 복사가능
+// // interface 장점: extends로 복사가능
 
-interface Student {
-  name: string; // 중복
-}
+// interface Student {
+//   name: string; // 중복
+// }
 
-interface Teacher extends Student {
-  // name: string; // 중복
-  age: number;
-}
+// interface Teacher extends Student {
+//   // name: string; // 중복
+//   age: number;
+// }
 
-// type extends 기능 (&기호 (intersection type))
+// // type extends 기능 (&기호 (intersection type))
 
-type Animal = { name: string };
-// Animal에 있는 속성을 Cat에 복사
-type Cat = { age: number } & Animal;
+// type Animal = { name: string };
+// // Animal에 있는 속성을 Cat에 복사
+// type Cat = { age: number } & Animal;
 
-let student: Student = { name: 'sean' };
-let teacher: Teacher = { name: 'yang', age: 45 };
+// let student: Student = { name: 'sean' };
+// let teacher: Teacher = { name: 'yang', age: 45 };
 
 // type VS interface
 
@@ -501,16 +501,227 @@ let teacher: Teacher = { name: 'yang', age: 45 };
 
 // 숙제 4
 
-interface NewObj {
-  plus: (x: number, y: number) => number;
-  minus: (a: number, b: number) => number;
-}
+// interface NewObj {
+//   plus: (x: number, y: number) => number;
+//   minus: (a: number, b: number) => number;
+// }
 
-let newObj: NewObj = {
-  plus: function (x, y) {
-    return x + y;
-  },
-  minus: function (a, b) {
-    return a - b;
-  },
+// let newObj: NewObj = {
+//   plus: function (x, y) {
+//     return x + y;
+//   },
+//   minus: function (a, b) {
+//     return a - b;
+//   },
+// };
+
+// 함수 rest 파라미어, destructing
+
+// function foo1(...a: number[]) {
+//   console.log(a);
+// }
+// foo1(1, 2, 3, 4, 5);
+
+// // spread operator
+
+// let arr = [1, 2, 3];
+// let arr2 = [5, 6];
+// let arr3 = [...arr, ...arr2];
+// console.log(arr3);
+
+// // destructuring
+
+// let [a, b] = [1, 2];
+// console.log(a);
+// console.log(b);
+
+// let person = { student: true, age: 20 };
+
+// // console.log(student, age);
+
+// function a({ student, age }: { student: boolean; age: number }) {
+//   console.log(student, age);
+// }
+
+// a({ student: true, age: 20 });
+
+// // 숙제 1
+
+// function bigNumber(...x: number[]) {
+//   let minNum = x[0];
+//   let length = x.length;
+
+//   for (let i = 0; i < length; i++) {
+//     if (x[i] > minNum) {
+//       minNum = x[i];
+//     }
+//   }
+//   return minNum;
+// }
+
+// console.log(bigNumber(2, 3, 6, 76));
+
+// // 숙제 2
+// type UserInfo = { user: 'yang'; comment: [3, 4, 5]; admin: false };
+
+// function obj({ user, comment, admin }: UserInfo) {
+//   console.log(user, comment, admin);
+// }
+// obj({ user: 'yang', comment: [3, 4, 5], admin: false });
+
+// // 숙제3
+
+// type Product = [age: number, type: string, isExpensive: boolean];
+
+// function product([age, type, isExpensive]: Product) {
+//   console.log(age, type, isExpensive);
+// }
+// console.log(product([40, 'wine', false]));
+
+// // never 타입
+// // 조건 1. return 값이 없어야함
+// // 조건 2. 함수실행이 끝나지 않아야 함 즉, endpoint가 없어야한다.
+// function naver(): never {}
+
+// never 타입은 코드를 이상하게 짜면 등장함
+
+//1. narrowing 이 이상한 경우
+// 2. 함수표현식은 return 타입이 자동으로 never
+
+// public, private
+
+// public이 붙으면 모든 자식들이 이용가능
+// class User {
+//   public name = 'kim';
+//   constructor(a) {
+//     this.name = a;
+//   }
+// }
+
+// let user1 = new User('park');
+// user1.name = 'yang'
+
+// private 이 붙으면 class 안에서만 수정, 이용가능
+
+// class User {
+//   name: string;
+//   private familyName: string = 'yang';
+//   constructor(a) {
+//     this.name = this.familyName + a;
+//   }
+
+//   changeName() {
+//     // 만약 긴급하게 private을 바꿔야되는 상황이라면 class 밖에서
+//     // 변경함수를 이용해 변경이 가능하다.
+//     this.familyName = 'park';
+//   }
+// }
+
+// let user2 = new User('sean');
+// console.log(user2); // 수정불가..private 때문에
+
+// user2.changeName();
+// // console.log(user2);
+
+// class Person {
+//   //public 키워드 사용하면 this. 생략가능하다
+//   constructor(public name: string) {}
+// }
+
+// let chil = new Person('kim');
+
+// console.log(chil);
+
+// class User {
+//   // protected를 붙이면 현재 class{} 안에서 + extends된 class{} 안에서 사용가능 하다
+//   protected x = 10;
+// }
+
+// class NewUser extends User {}
+
+// protected: extends 된 class는 사용가능, 자식들 사용불가능
+// private: extends 된 class는 사용 불가능, 자식들 사용불가능
+
+// static
+// static 키워드를 붙이면 부모 class에 직접 부여됨
+// class User {
+//   static x = 10;
+//   y = 20;
+// }
+
+// let 자식 = new User();
+// console.log(User.x);
+
+// class User2 {
+//   static skill = 'js';
+//   intro = 'hello' + User2.skill;
+// }
+
+// let sean = new User2();
+
+// User2.skill = 'ts';
+
+// let a = new User2();
+// console.log(a);
+
+// 숙제 1
+
+// private 이 붙으면 class 내 에서만 사용,수정이 가능하다
+// public이 붙으면 모든 자식들이 사용이 가능하다
+// protected 는 extends 된 class 는 사용 가능하지만, 자식들은 사용이 불가능하다
+
+// 숙제 2
+
+// class User {
+//   private static x = 10;
+//   public static y = 20;
+// }
+
+// User.addOne(3)
+// User.addOne(4)
+// User.printX()
+
+// import export
+//  리액트랑 거의 흡사하다!
+// export type
+// export interface
+// namespace
+// namespace a {
+//   export type Name = string | number;
+// }
+
+// import { Car, Bike } from './s';
+
+// let car: Car = { wheel: 2, model: 'hundai' };
+
+// console.log(car);
+
+// import { Anything } from './s';
+
+// let anyThing: Anything = function (x) {
+//   console.log(x);
+// };
+
+// console.log(anyThing({ name: 'sean' }));
+
+// generic - 파라미터로 타입을 입력하는 함수
+
+// 장점 : 확장성
+// function foo<T>(x: T[]): T {
+//   return x[0];
+// }
+// let a = foo<number>([4, 2]);
+// // console.log(a + 1);
+
+// let b = foo<string>(['4', '2']);
+
+// 타입파라미터 제한두기
+// T가 우측에 있는 속성으 가지고 있는지 체크한다.
+
+interface LengthCheck {
+  length: number;
+}
+const minus = <T extends LengthCheck>(x: T) => {
+  return x.length;
 };
+let a = minus<string>('100');
