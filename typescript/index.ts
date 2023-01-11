@@ -718,10 +718,86 @@
 // 타입파라미터 제한두기
 // T가 우측에 있는 속성으 가지고 있는지 체크한다.
 
-interface LengthCheck {
-  length: number;
+// interface LengthCheck {
+//   length: number;
+// }
+// const minus = <T extends LengthCheck>(x: T) => {
+//   return x.length;
+// };
+// let a = minus<string>('100');
+
+// 숙제 1
+
+// interface LengthSentence {
+//   length: number;
+// }
+
+// const sentence = <T extends string | string[]>(y: T) => {
+//   return y.length;
+// };
+
+// console.log(sentence<string[]>(['kim', 'park']));
+// console.log(sentence<string>('seanyang'));
+
+// // 숙제 2
+
+// interface Animal {
+//   name: string;
+//   age: number;
+// }
+
+// let data = '{"name": "dog", "age": 1}';
+
+// const animal = <T>(x: string) => {
+//   return JSON.parse(x);
+// };
+
+// console.log(animal<Animal>(data));
+
+// // 숙제 3
+
+// class Person<T> {
+//   name;
+//   constructor(a: T) {
+//     this.name = a;
+//   }
+// }
+// let a = new Person<string>('sean');
+// a.name;
+
+// // tuple
+// let bark: [string, boolean?] = ['dog', true];
+
+// function doo(...x:number[]) {
+//   console.log(x);
+// }
+// let arr = [1,2,3,2134,1223]
+// let arr2 :[number,number, ...number[]] = [3,4 ...arr]
+
+// // 숙제1
+
+// let info:[string, number, boolean] = ['치킨', 26000, true]
+
+// // 숙제 2
+// let a:[string, number, ...boolean[]] = ['동서녹차', 4000, true, false, true, true, true]
+
+// // 숙제 3
+
+function practice(...x: [string, boolean, ...(number | string)[]]) {}
+practice('a', true, 6, 3, '1', 2);
+
+// 숙제 4
+
+function sorting(...x: [...(number | string)[]]) {
+  let result: [string[], number[]] = [[], []];
+
+  x.forEach(x => {
+    if (typeof x === 'string') {
+      result[0].push(x);
+    } else {
+      result[1].push(x);
+    }
+  });
+  return result;
 }
-const minus = <T extends LengthCheck>(x: T) => {
-  return x.length;
-};
-let a = minus<string>('100');
+console.log(sorting('b', 3, 4, 5, 'c'));
