@@ -783,21 +783,155 @@
 
 // // 숙제 3
 
-function practice(...x: [string, boolean, ...(number | string)[]]) {}
-practice('a', true, 6, 3, '1', 2);
+// function practice(...x: [string, boolean, ...(number | string)[]]) {}
+// practice('a', true, 6, 3, '1', 2);
 
-// 숙제 4
+// // 숙제 4
 
-function sorting(...x: [...(number | string)[]]) {
-  let result: [string[], number[]] = [[], []];
+// function sorting(...x: [...(number | string)[]]) {
+//   let result: [string[], number[]] = [[], []];
 
-  x.forEach(x => {
-    if (typeof x === 'string') {
-      result[0].push(x);
-    } else {
-      result[1].push(x);
-    }
-  });
-  return result;
-}
-console.log(sorting('b', 3, 4, 5, 'c'));
+//   x.forEach(x => {
+//     if (typeof x === 'string') {
+//       result[0].push(x);
+//     } else {
+//       result[1].push(x);
+//     }
+//   });
+//   return result;
+// }
+// console.log(sorting('b', 3, 4, 5, 'c'));
+
+// declare & ambient module
+
+// 이렇게 해도 index.html console 에는 잘 나옴 하지만 에러가 걸림..
+// declare let a: number; // declare 를 사용하면 재정의가 되어서 에러가 나지 않는다.
+
+// import { a } from './data';
+// console.log(a + 1);
+
+// let b: Dog = 'kim';
+
+// d.ts 파일 사용하기
+
+// let he: string = 'kim';
+// type Age = number;
+
+// interface CarType {
+// model: string;
+//   price: number;
+// }
+
+// // implements 는 interface에 들어있는 속성을 가지고 있는지 확인만하라는 뜻이다.
+// // class 에다가 타입을 할당하고 변형시키는 키워드는 아니다.
+// class Car implements CarType {
+//   model: string;
+//   price: number = 1000;
+//   constructor(a: string) {
+//     this.model = a;
+//   }
+// }
+
+// let car = new Car('morning');
+
+// object index signatures
+
+// interface User {
+//   [key: number]: string | number; // 모든 타입 속성을 하나로 똑같이 지정하고 싶을때 사용하면 좋다/
+// }
+
+// let user = {
+//   0: 'kim',
+//   1: '20',
+//   2: 'seoul',
+// };
+
+// console.log(user[0]);
+
+// let css = {
+//   a: {
+//     a: {
+//       a: 13,
+//     },
+//   },
+// };
+
+// console.log(css['a']['a']['a']);
+
+// // 숙제 1
+
+// interface Obj {
+//   [key: string]: string | number;
+// }
+
+// let obj: Obj = {
+//   model: 'k5',
+//   brand: 'kia',
+//   price: 6000,
+//   year: 2030,
+//   date: '6월',
+//   percent: '5%',
+//   dealer: '양차장',
+// };
+
+// object 타입 변환기
+
+// keyof
+
+// let obj = {
+//   name: 'yang',
+//   age: 20,
+// };
+// Object.keys(obj);
+
+// interface Person {
+//   // age: number,
+//   // name: string
+//   [key: string]: number;
+// }
+
+// type PersonKeys = keyof Person;
+// let a: PersonKeys = 'name';
+
+// mapping 타입 변환기
+// type Car = {
+//   color: boolean;
+//   model: boolean;
+//   price: boolean | number;
+// };
+
+// type TypeChanger<T> = {
+//   [key in keyof T]: string;
+// };
+
+// type newType = TypeChanger<Car>;
+
+// 숙제 1
+
+// type Bus = {
+//   color: string;
+//   model: boolean;
+//   price: number;
+// };
+
+// type BusTypeChange<T> = {
+//   [key in keyof T]: string | number;
+// };
+
+// type newBusType = BusTypeChange<Bus>;
+
+// 조건문으로 타입 만들기 & infer
+
+type Age<T> = T extends string ? string : unknown;
+
+let a: Age<string>;
+let b: Age<number>;
+
+type FirstItem<T> = T extends any[] ? T[0] : any;
+
+let arr: FirstItem<string[]>;
+let arr2: FirstItem<number>;
+
+type Person<T> = T extends (infer R)[] ? string : unknown;
+
+type a = Person<string[]>;
